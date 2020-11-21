@@ -745,7 +745,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             for (let t = 0; meshes.length < 400; t++) {
                 let SandMesh = meshes[0].clone()
-                SandMesh.smallmutate()
+                if (meshes.length < 380) {
+                    SandMesh.bigmutate()
+                } else if (meshes.length < 390) {
+                    SandMesh.mutate()
+                } else {
+                    SandMesh.smallmutate()
+                }
                 meshes.push(SandMesh)
             }
 
@@ -753,7 +759,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (counter % counterstopsmall == 0) {
                 // console.log(meshes[0].name, 100 * (meshes[0].wrong / (meshes[0].correct + meshes[0].wrong)), `${meshes[0].wrong}/${meshes[0].correct + meshes[0].wrong}`)
                 canvas.style.background = "black" //meshes[0].name
-            
+
                 // counterstop += (difficulty * Math.round(difficulty * 10))
                 // counterstop = Math.round(counterstop)
                 // console.log(difficulty, ".7ings")
@@ -770,8 +776,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
                 meshes.sort((a, b) => (a.fitness < b.fitness) ? 1 : -1)
                 let clonebest = meshes[0].clone()
+                clonebest.wrong = meshes[0].wrong
+                clonebest.correct = meshes[0].correct
+                clonebest.fitness = 0
                 meshes = meshes.filter(mesh => mesh.marked == 0)
                 meshes.sort((a, b) => (a.fitness < b.fitness) ? 1 : -1)
+
+                for (let t = 0; t < meshes.length; t++) {
+                    meshes[t].fitness = 0
+                }
                 // if(Math.random() < 1/(difficulty*10)){
                 //     meshes.splice(395,5)
                 // }
