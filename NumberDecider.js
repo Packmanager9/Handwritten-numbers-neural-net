@@ -447,7 +447,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         this.bias = (Math.random() - .5) * .01
                     }
                     if (Math.random() < mutationrate) {
-                        this.bias += (.2 * (Math.random() - .5))
+                        this.bias += (.1 * (Math.random() - .5))
                     }
                     if (Math.random() < mutationrate) {
                         this.bias *= 1 + ((Math.random() - .5) * .5)
@@ -482,7 +482,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         this.bias = (Math.random() - .5) * .01
                     }
                     if (Math.random() < mutationratesmall) {
-                        this.bias += (.2 * (Math.random() - .5))
+                        this.bias += (.02 * (Math.random() - .5))
                     }
                     if (Math.random() < mutationratesmall) {
                         this.bias *= 1 + ((Math.random() - .5) * .5)
@@ -702,8 +702,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
             inputArray.push(Math.random())
         ]
         // for (let t = 0; t < 2000; t++) {
-        // let SandMesh = new GenNN([...inputArray], 3, [28, 28, 10], 4, origin)
-
+        // let SandMesh = new GenNN([...inputArray], 3, [16, 16, 10], 4)
+        // meshes.push(SandMesh)
+        // }
         // clone() {
         let clone = new GenNN(origin.inputs, origin.layercount, origin.layersetupArray, 4)
         for (let t = 0; t < origin.structure.length; t++) {
@@ -727,12 +728,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
         meshes.push(clone)
         // }
         let counter = 1
-        let counterstop = 1001
+        let counterstop = 10001
         let counterstopsmall = 5
         let mutationratebig = .019
         let mutationrate = .0009
         let mutationratesmall = .00009
-        let difficulty = 0
+        let difficulty = .5
         let numcounter = 0
 
 
@@ -743,15 +744,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 console.log(meshes)
             }
 
-            for (let t = 0; meshes.length < 400; t++) {
+            for (let t = 0; meshes.length < 40; t++) {
                 let SandMesh = meshes[0].clone()
-                if (meshes.length < 380) {
-                    SandMesh.bigmutate()
-                } else if (meshes.length < 390) {
-                    SandMesh.mutate()
-                } else {
+                // if (meshes.length < 20) {
+                //     SandMesh.bigmutate()
+                // } else if (meshes.length < 30) {
+                    // SandMesh.mutate()
+                // } else {
                     SandMesh.smallmutate()
-                }
+                // }
                 meshes.push(SandMesh)
             }
 
@@ -791,7 +792,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (meshes.length == 0) {
                     meshes.push(clonebest)
 
-                    console.log("dropped", (400 - meshes.length), "difficulty", difficulty, "best", meshes[0], "number", variablenumber, "output", meshes[0].outputMagnitudes, "rate", 100 * (meshes[0].wrong / (meshes[0].correct + meshes[0].wrong)), `${meshes[0].wrong}/${meshes[0].correct + meshes[0].wrong}`)
+                    console.log("dropped", (40 - meshes.length), "difficulty", difficulty, "best", meshes[0], "number", variablenumber, "output", meshes[0].outputMagnitudes, "rate", 100 * (meshes[0].wrong / (meshes[0].correct + meshes[0].wrong)), `${meshes[0].wrong}/${meshes[0].correct + meshes[0].wrong}`)
 
                     // let SandMesh = new GenNN([...inputArray], 3, [28, 28, 10], 4)
                     // meshes.push(SandMesh)
@@ -808,16 +809,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     //     meshes.push(SandMesh)
                     // }
                 } else {
-                    console.log("dropped", (400 - meshes.length), "difficulty", difficulty, "best", meshes[0], "number", variablenumber, "output", meshes[0].outputMagnitudes, "rate", 100 * (meshes[0].wrong / (meshes[0].correct + meshes[0].wrong)), `${meshes[0].wrong}/${meshes[0].correct + meshes[0].wrong}`)
-                    for (let t = 0; meshes.length < 400; t++) {
+                    console.log("dropped", (40 - meshes.length), "difficulty", difficulty, "best", meshes[0], "number", variablenumber, "output", meshes[0].outputMagnitudes, "rate", 100 * (meshes[0].wrong / (meshes[0].correct + meshes[0].wrong)), `${meshes[0].wrong}/${meshes[0].correct + meshes[0].wrong}`)
+                    for (let t = 0; meshes.length < 40; t++) {
                         let SandMesh = meshes[0].clone()
-                        if (meshes.length < 380) {
-                            SandMesh.bigmutate()
-                        } else if (meshes.length < 390) {
-                            SandMesh.mutate()
-                        } else {
+                        // if (meshes.length < 20) {
+                        //     SandMesh.bigmutate()
+                        // } else if (meshes.length < 30) {
+                        //     SandMesh.mutate()
+                        // } else {
                             SandMesh.smallmutate()
-                        }
+                        // }
                         meshes.push(SandMesh)
                     }
                 }
@@ -854,10 +855,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             meshes[t].marked = 0
                             // meshes[t].fitness += .6
                             // meshes[t].fitness += (meshes[t].outputMagnitudes[k]*7)
+                            meshes[t].fitness += meshes[t].outputMagnitudes[k] 
                             meshes[t].fitness += 1 - (difficulty)
                             meshes[t].correct += 1
                         } else {
                             // meshes[t].fitness -= (( (1-meshes[t].outputMagnitudes[k] ))/1.8)*difficulty
+                            meshes[t].fitness += meshes[t].outputMagnitudes[k] 
                             meshes[t].fitness -= 1 + (difficulty)
                             meshes[t].wrong += 1
                         }
