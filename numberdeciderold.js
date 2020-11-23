@@ -2,48 +2,82 @@
 
 
 let img0 = []
-for (let i = 0; i < 999; i++) {
-    img0.push(Object.assign(new Image(), { 'src': `0/0-${i}.jpg` }));
+for (let i = 100; i < 999; i++) {
+    img0.push(Object.assign(new Image(), { 'src': `0/0-1,${i}.jpg` }));
 }
 let img1 = []
-for (let i = 0; i < 999; i++) {
-    img1.push(Object.assign(new Image(), { 'src': `1/1-${i}.jpg` }));
+for (let i = 100; i < 999; i++) {
+    img1.push(Object.assign(new Image(), { 'src': `1/1-1,${i}.jpg` }));
 }
 let img2 = []
-for (let i = 0; i < 999; i++) {
-    img2.push(Object.assign(new Image(), { 'src': `2/2-${i}.jpg` }));
+for (let i = 100; i < 999; i++) {
+    img2.push(Object.assign(new Image(), { 'src': `2/2-1,${i}.jpg` }));
 }
 let img3 = []
-for (let i = 0; i < 999; i++) {
+for (let i = 100; i < 999; i++) {
     img3.push(Object.assign(new Image(), { 'src': `3/3-${i}.jpg` }));
 }
 let img4 = []
+for (let i = 100; i < 999; i++) {
+    img4.push(Object.assign(new Image(), { 'src': `4/4-1,${i}.jpg` }));
+}
+let img5 = []
+for (let i = 100; i < 999; i++) {
+    img5.push(Object.assign(new Image(), { 'src': `5/5-1,${i}.jpg` }));
+}
+let img6 = []
+for (let i = 100; i < 999; i++) {
+    img6.push(Object.assign(new Image(), { 'src': `6/6-1,${i}.jpg` }));
+}
+let img7 = []
+for (let i = 100; i < 999; i++) {
+    img7.push(Object.assign(new Image(), { 'src': `7/7-1,${i}.jpg` }));
+}
+let img8 = []
+for (let i = 100; i < 999; i++) {
+    img8.push(Object.assign(new Image(), { 'src': `8/8-1,${i}.jpg` }));
+}
+let img9 = []
+for (let i = 100; i < 999; i++) {
+    img9.push(Object.assign(new Image(), { 'src': `9/9-1,${i}.jpg` }));
+}
+
+
+for (let i = 0; i < 999; i++) {
+    img0.push(Object.assign(new Image(), { 'src': `0/0-${i}.jpg` }));
+}
+for (let i = 0; i < 999; i++) {
+    img1.push(Object.assign(new Image(), { 'src': `1/1-${i}.jpg` }));
+}
+for (let i = 0; i < 999; i++) {
+    img2.push(Object.assign(new Image(), { 'src': `2/2-${i}.jpg` }));
+}
+for (let i = 0; i < 999; i++) {
+    img3.push(Object.assign(new Image(), { 'src': `3/3-${i}.jpg` }));
+}
 for (let i = 0; i < 999; i++) {
     img4.push(Object.assign(new Image(), { 'src': `4/4-${i}.jpg` }));
 }
-let img5 = []
 for (let i = 0; i < 999; i++) {
     img5.push(Object.assign(new Image(), { 'src': `5/5-${i}.jpg` }));
 }
-let img6 = []
 for (let i = 0; i < 999; i++) {
     img6.push(Object.assign(new Image(), { 'src': `6/6-${i}.jpg` }));
 }
-let img7 = []
 for (let i = 0; i < 999; i++) {
     img7.push(Object.assign(new Image(), { 'src': `7/7-${i}.jpg` }));
 }
-let img8 = []
 for (let i = 0; i < 999; i++) {
     img8.push(Object.assign(new Image(), { 'src': `8/8-${i}.jpg` }));
 }
-let img9 = []
 for (let i = 0; i < 999; i++) {
     img9.push(Object.assign(new Image(), { 'src': `9/9-${i}.jpg` }));
 }
 
 
+
 let logger = 1
+
 window.addEventListener('DOMContentLoaded', (event) => {
     window.setTimeout(function () {
 
@@ -57,6 +91,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             window.setInterval(function () {
                 main()
             }, 1)
+    
             document.addEventListener('keydown', (event) => {
                 keysPressed[event.key] = true;
                 // logger = 1
@@ -76,6 +111,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             return color;
         }
+
         let rater = document.getElementById('rater') //getting canvas from document
         let step = document.getElementById('step') //getting canvas from document
         let setup_canvas = document.getElementById('canvas') //getting canvas from document
@@ -146,7 +182,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             example_context.drawImage(img9[imgindex], 0, 0)
             variablenumber = 9
             imgindex++
-            imgindex %= 999
+            imgindex %= (899+999)
         }
         function drawRectangle() {
             example_context.clearRect(0, 0, 28, 28)
@@ -579,7 +615,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                     this.outputSum = 0
                     for (let t = 0; t < this.outputs; t++) {
-                        this.outputMagnitudes[t] = this.normalize(this.outputMagnitudes[t], Math.min(...this.outputMagnitudesClone), Math.max(...this.outputMagnitudesClone))
                         this.outputMagnitudes[t] = this.truenormalize(this.outputMagnitudes[t], Math.min(...this.outputMagnitudesClone), Math.max(...this.outputMagnitudesClone))
                         this.outputSum += this.outputMagnitudes[t]
                     }
@@ -684,7 +719,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
                 this.outputSum = 0
                 for (let t = 0; t < this.outputs; t++) {
-                    this.outputMagnitudes[t] = this.normalize(this.outputMagnitudes[t], Math.min(...this.outputMagnitudesClone), Math.max(...this.outputMagnitudesClone))
                     this.outputMagnitudes[t] = this.truenormalize(this.outputMagnitudes[t], Math.min(...this.outputMagnitudesClone), Math.max(...this.outputMagnitudesClone))
                     this.outputSum += this.outputMagnitudes[t]
                 }
@@ -699,16 +733,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 this.structure = this.structureclone
             }
             normalize(val, min, max) {
-                // if (min < 0) {
-                //     max += 0 - min;
-                //     val += 0 - min;
-                //     min = 0;
-                // }
-                // val = val - min;
-                // max = max - min;
-                // return Math.max(0, Math.min(1, val / max));
-
-                return Math.max(val,0)
+                if (min < 0) {
+                    max += 0 - min;
+                    val += 0 - min;
+                    min = 0;
+                }
+                val = val - min;
+                max = max - min;
+                return Math.max(0, Math.min(1, val / max));
                 // return Math.max(Math.min(val,1),0)
             }
             truenormalize(val, min, max) {
@@ -732,38 +764,75 @@ window.addEventListener('DOMContentLoaded', (event) => {
         for (let t = 0; t < 784; t++) [
             inputArray.push(Math.random())
         ]
-        for (let t = 0; t < 40; t++) {
-        let SandMesh = new GenNN([...inputArray], 3, [56, 28, 10], 4)
-        meshes.push(SandMesh)
-        }
-        // clone() {
-        // let clone = new GenNN(origin.inputs, origin.layercount, origin.layersetupArray, 4)
-        // for (let t = 0; t < origin.structure.length; t++) {
-        //     for (let k = 0; k < origin.structure[t].length; k++) {
-        //         for (let p = 0; p < origin.structure[t][k].weights.length; p++) {
-        //             clone.structure[t][k].weights[p] = origin.structure[t][k].weights[p]
-        //         }
-        //     }
+        // for (let t = 0; t < 10; t++) {
+        // let SandMesh = new GenNN([...inputArray], 3, [16, 16, 10], 4)
+        // meshes.push(SandMesh)
         // }
-        // clone.generation = origin.generation + 1
-        // clone.r = Math.round(Math.max(Math.min((origin.r + ((Math.random() - .5) * 36)), 255), 0))
-        // clone.g = Math.round(Math.max(Math.min((origin.g + ((Math.random() - .5) * 36)), 255), 0))
-        // clone.b = Math.round(Math.max(Math.min((origin.b + ((Math.random() - .5) * 36)), 255), 0))
-        // clone.parent = origin.name
-        // clone.name = `rgb(${clone.r},${clone.g},${clone.b})`
+        // clone() {
+        let clone = new GenNN(origin.inputs, origin.layercount, origin.layersetupArray, 4)
+        for (let t = 0; t < origin.structure.length; t++) {
+            for (let k = 0; k < origin.structure[t].length; k++) {
+                for (let p = 0; p < origin.structure[t][k].weights.length; p++) {
+                    clone.structure[t][k].weights[p] = origin.structure[t][k].weights[p]
+                }
+            }
+        }
+        clone.generation = origin.generation + 1
+        clone.r = 0
+        clone.g = 255
+        clone.b = 0
+        clone.parent = origin.name
+        clone.name = `rgb(${clone.r},${clone.g},${clone.b})`
+
+
+        let clone2 = new GenNN(origin2.inputs, origin2.layercount, origin2.layersetupArray, 4)
+        for (let t = 0; t < origin2.structure.length; t++) {
+            for (let k = 0; k < origin2.structure[t].length; k++) {
+                for (let p = 0; p < origin2.structure[t][k].weights.length; p++) {
+                    clone2.structure[t][k].weights[p] = origin2.structure[t][k].weights[p]
+                }
+            }
+        }
+        clone2.generation = origin2.generation + 1
+        clone2.r = 255
+        clone2.g = 0
+        clone2.b = 0
+        clone2.parent = origin2.name
+        clone2.name = `rgb(${clone2.r},${clone2.g},${clone2.b})`
+
+
+        let hybrid = new GenNN(origin2.inputs, origin2.layercount, origin2.layersetupArray, 4)
+        for (let t = 0; t < origin2.structure.length; t++) {
+            for (let k = 0; k < origin2.structure[t].length; k++) {
+                for (let p = 0; p < origin2.structure[t][k].weights.length; p++) {
+                    hybrid.structure[t][k].weights[p] = (origin2.structure[t][k].weights[p]+ origin.structure[t][k].weights[p])*.5
+                }
+            }
+        }
+        hybrid.generation =( .5*(origin2.generation +origin.generation))+ 1
+        hybrid.r = 255
+        hybrid.g = 255
+        hybrid.b = 0
+        hybrid.parent = "tube"
+        hybrid.name = `rgb(${hybrid.r},${hybrid.g},${hybrid.b})`
 
 
 
         // return clone
         // }
         // meshes.push(clone)
+        // meshes.push(clone2)
+        meshes.push(hybrid)
         // }
         let counter = 1
-        let counterstop = 10000
+        let counterstop = (899+999)*10
         let counterstopsmall = 5.1
-        let mutationratebig = .019
-        let mutationrate = .0009
-        let mutationratesmall = .000009  //1 fewer zeros
+        // let mutationratebig = .019
+        // let mutationrate = .0009
+        // let mutationratesmall = .00009
+        let mutationratebig = .000019
+        let mutationrate = .000009
+        let mutationratesmall = .0000009
         let difficulty = .5
         let numcounter = 0
 
@@ -779,17 +848,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
             }
 
-            for (let t = 0; meshes.length < 40; t++) {
-                let SandMesh = meshes[0].clone()
-                if (meshes.length < 20) {
-                    SandMesh.bigmutate()
-                } else if (meshes.length < 30) {
-                    SandMesh.mutate()
-                } else {
-                    SandMesh.smallmutate()
-                }
-                meshes.push(SandMesh)
-            }
+            // for (let t = 0; meshes.length < 40; t++) {
+            //     let SandMesh = meshes[0].clone()
+            //     if (meshes.length < 20) {
+            //         SandMesh.bigmutate()
+            //     } else if (meshes.length < 30) {
+            //         SandMesh.mutate()
+            //     } else {
+            //         SandMesh.smallmutate()
+            //     }
+            //     meshes.push(SandMesh)
+            // }
 
             canvas_context.clearRect(0, 0, 700, 700)
             if (counter % counterstopsmall == 0) {
@@ -828,7 +897,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if (meshes.length == 0) {
                     meshes.push(clonebest)
 
-                    console.log("dropped", (40 - meshes.length), "difficulty", difficulty, "best", meshes[0], "number", variablenumber, "output", meshes[0].outputMagnitudes, "rate", 100 * (meshes[0].wrong / (meshes[0].correct + meshes[0].wrong)), `${meshes[0].wrong}/${meshes[0].correct + meshes[0].wrong}`)
+                    console.log("dropped", (10 - meshes.length), "difficulty", difficulty, "best", meshes[0], "number", variablenumber, "output", meshes[0].outputMagnitudes, "rate", 100 * (meshes[0].wrong / (meshes[0].correct + meshes[0].wrong)), `${meshes[0].wrong}/${meshes[0].correct + meshes[0].wrong}`)
 
                     // let SandMesh = new GenNN([...inputArray], 3, [28, 28, 10], 4)
                     // meshes.push(SandMesh)
@@ -845,12 +914,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     //     meshes.push(SandMesh)
                     // }
                 } else {
-                    console.log("dropped", (40 - meshes.length), "difficulty", difficulty, "best", meshes[0], "number", variablenumber, "output", meshes[0].outputMagnitudes, "rate", 100 * (meshes[0].wrong / (meshes[0].correct + meshes[0].wrong)), `${meshes[0].wrong}/${meshes[0].correct + meshes[0].wrong}`)
-                    for (let t = 0; meshes.length < 40; t++) {
+                    console.log("dropped", (10 - meshes.length), "difficulty", difficulty, "best", meshes[0], "number", variablenumber, "output", meshes[0].outputMagnitudes, "rate", 100 * (meshes[0].wrong / (meshes[0].correct + meshes[0].wrong)), `${meshes[0].wrong}/${meshes[0].correct + meshes[0].wrong}`)
+                    for (let t = 0; meshes.length < 10; t++) {
                         let SandMesh = meshes[0].clone()
-                        if (meshes.length < 20) {
+                        if (meshes.length < 4) {
                             SandMesh.bigmutate()
-                        } else if (meshes.length < 30) {
+                        } else if (meshes.length < 7) {
                             SandMesh.mutate()
                         } else {
                             SandMesh.smallmutate()
@@ -859,17 +928,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
 
-                // for (let t = 0; meshes.length < 400; t++) {
-                //     let SandMesh = meshes[0].clone()
-                //     if(meshes.length < 380){
-                //         SandMesh.bigmutate()
-                //     }else if(meshes.length < 390){
-                //         SandMesh.mutate()
-                //     }else{
-                //         SandMesh.smallmutate()
-                //     }
-                //     meshes.push(SandMesh)
-                // }
+                for (let t = 0; meshes.length < 10; t++) {
+                    let SandMesh = meshes[0].clone()
+                    if (meshes.length < 4) {
+                        SandMesh.bigmutate()
+                    } else if (meshes.length < 7) {
+                        SandMesh.mutate()
+                    } else {
+                        SandMesh.smallmutate()
+                    }
+                    meshes.push(SandMesh)
+                }
                 // if (meshes[0].fitness < 100) {
                 // for (let t = 0; meshes.length < 100; t++) {
                 //     let SandMesh = new GenNN([...inputArray], 3, [28, 28, 10], 4)
@@ -892,14 +961,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             // meshes[t].fitness += .6
                             // meshes[t].fitness += (meshes[t].outputMagnitudes[k]*7)
                             meshes[t].fitness += meshes[t].outputMagnitudes[k] 
-                            // meshes[t].fitness += 1 - (difficulty)
-                            meshes[t].fitness -= 1
+                            meshes[t].fitness += 1 - (difficulty)
+                            // meshes[t].fitness -= 1
                             meshes[t].correct += 1
                         } else {
                             // meshes[t].fitness -= (( (1-meshes[t].outputMagnitudes[k] ))/1.8)*difficulty
                             meshes[t].fitness += meshes[t].outputMagnitudes[k] 
-                            // meshes[t].fitness -= 1 + (difficulty)
-                            meshes[t].fitness -= 1
+                            meshes[t].fitness -= 1 + (difficulty)
+                            // meshes[t].fitness -= 100
                             meshes[t].wrong += 1
                         }
                     }
@@ -965,7 +1034,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 meshes[t].changeInputs([...inputArray])
             }
             // // console.log(inputArray)
-            step.innerText = numcounter%10000
+
+            step.innerText = numcounter%((899+999)*10)
             rater.innerText =  Math.floor(10000 * (meshes[0].wrong / (meshes[0].correct + meshes[0].wrong)))/100
             numcounter++
         }
@@ -973,4 +1043,3 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }, 5000);
 
 })
-
