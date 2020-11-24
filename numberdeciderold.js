@@ -87,10 +87,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
         function setUp(canvas_pass, style = "#000000") {
             canvas = canvas_pass
             canvas_context = canvas.getContext('2d');
+            canvas_context.imageSmoothingEnabled = false
             canvas.style.background = style
             window.setInterval(function () {
                 main()
-            }, 1)
+            }, 10)
     
             document.addEventListener('keydown', (event) => {
                 keysPressed[event.key] = true;
@@ -120,6 +121,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
         example_context = example_canvas.getContext('2d');
+        example_context.imageSmoothingEnabled = false
 
         example_canvas.style.background = "black"
 
@@ -134,52 +136,52 @@ window.addEventListener('DOMContentLoaded', (event) => {
         let variablenumber = -1
         function draw0() {
             example_context.clearRect(0, 0, 28, 28)
-            example_context.drawImage(img0[imgindex], 0, 0)
+            example_context.drawImage(img0[imgindex+0], 0, 0)
             variablenumber = 0
         }
         function draw1() {
             example_context.clearRect(0, 0, 28, 28)
-            example_context.drawImage(img1[imgindex], 0, 0)
+            example_context.drawImage(img1[imgindex+0], 0, 0)
             variablenumber = 1
         }
         function draw2() {
             example_context.clearRect(0, 0, 28, 28)
-            example_context.drawImage(img2[imgindex], 0, 0)
+            example_context.drawImage(img2[imgindex+0], 0, 0)
             variablenumber = 2
         }
         function draw3() {
             example_context.clearRect(0, 0, 28, 28)
-            example_context.drawImage(img3[imgindex], 0, 0)
+            example_context.drawImage(img3[imgindex+0], 0, 0)
             variablenumber = 3
         }
         function draw4() {
             example_context.clearRect(0, 0, 28, 28)
-            example_context.drawImage(img4[imgindex], 0, 0)
+            example_context.drawImage(img4[imgindex+0], 0, 0)
             variablenumber = 4
         }
         function draw5() {
             example_context.clearRect(0, 0, 28, 28)
-            example_context.drawImage(img5[imgindex], 0, 0)
+            example_context.drawImage(img5[imgindex+0], 0, 0)
             variablenumber = 5
         }
         function draw6() {
             example_context.clearRect(0, 0, 28, 28)
-            example_context.drawImage(img6[imgindex], 0, 0)
+            example_context.drawImage(img6[imgindex+0], 0, 0)
             variablenumber = 6
         }
         function draw7() {
             example_context.clearRect(0, 0, 28, 28)
-            example_context.drawImage(img7[imgindex], 0, 0)
+            example_context.drawImage(img7[imgindex+0], 0, 0)
             variablenumber = 7
         }
         function draw8() {
             example_context.clearRect(0, 0, 28, 28)
-            example_context.drawImage(img8[imgindex], 0, 0)
+            example_context.drawImage(img8[imgindex+0], 0, 0)
             variablenumber = 8
         }
         function draw9() {
             example_context.clearRect(0, 0, 28, 28)
-            example_context.drawImage(img9[imgindex], 0, 0)
+            example_context.drawImage(img9[imgindex+0], 0, 0)
             variablenumber = 9
             imgindex++
             imgindex %= (899+999)
@@ -641,6 +643,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     for (let k = 0; k < this.structure[t].length; k++) {
                         for (let p = 0; p < this.structure[t][k].weights.length; p++) {
                             clone.structure[t][k].weights[p] = this.structure[t][k].weights[p]
+                            clone.structure[t][k].bias = this.structure[t][k].bias
                         }
                     }
                 }
@@ -774,55 +777,56 @@ window.addEventListener('DOMContentLoaded', (event) => {
             for (let k = 0; k < origin.structure[t].length; k++) {
                 for (let p = 0; p < origin.structure[t][k].weights.length; p++) {
                     clone.structure[t][k].weights[p] = origin.structure[t][k].weights[p]
+                    clone.structure[t][k].bias = origin.structure[t][k].bias
                 }
             }
         }
         clone.generation = origin.generation + 1
-        clone.r = 0
-        clone.g = 255
-        clone.b = 0
+        clone.r = 220
+        clone.g = 220
+        clone.b = 40
         clone.parent = origin.name
         clone.name = `rgb(${clone.r},${clone.g},${clone.b})`
 
 
-        let clone2 = new GenNN(origin2.inputs, origin2.layercount, origin2.layersetupArray, 4)
-        for (let t = 0; t < origin2.structure.length; t++) {
-            for (let k = 0; k < origin2.structure[t].length; k++) {
-                for (let p = 0; p < origin2.structure[t][k].weights.length; p++) {
-                    clone2.structure[t][k].weights[p] = origin2.structure[t][k].weights[p]
-                }
-            }
-        }
-        clone2.generation = origin2.generation + 1
-        clone2.r = 255
-        clone2.g = 0
-        clone2.b = 0
-        clone2.parent = origin2.name
-        clone2.name = `rgb(${clone2.r},${clone2.g},${clone2.b})`
+        // let clone2 = new GenNN(origin2.inputs, origin2.layercount, origin2.layersetupArray, 4)
+        // for (let t = 0; t < origin2.structure.length; t++) {
+        //     for (let k = 0; k < origin2.structure[t].length; k++) {
+        //         for (let p = 0; p < origin2.structure[t][k].weights.length; p++) {
+        //             clone2.structure[t][k].weights[p] = origin2.structure[t][k].weights[p]
+        //         }
+        //     }
+        // }
+        // clone2.generation = origin2.generation + 1
+        // clone2.r = 255
+        // clone2.g = 0
+        // clone2.b = 0
+        // clone2.parent = origin2.name
+        // clone2.name = `rgb(${clone2.r},${clone2.g},${clone2.b})`
 
 
-        let hybrid = new GenNN(origin2.inputs, origin2.layercount, origin2.layersetupArray, 4)
-        for (let t = 0; t < origin2.structure.length; t++) {
-            for (let k = 0; k < origin2.structure[t].length; k++) {
-                for (let p = 0; p < origin2.structure[t][k].weights.length; p++) {
-                    hybrid.structure[t][k].weights[p] = (origin2.structure[t][k].weights[p]+ origin.structure[t][k].weights[p])*.5
-                }
-            }
-        }
-        hybrid.generation =( .5*(origin2.generation +origin.generation))+ 1
-        hybrid.r = 255
-        hybrid.g = 255
-        hybrid.b = 0
-        hybrid.parent = "tube"
-        hybrid.name = `rgb(${hybrid.r},${hybrid.g},${hybrid.b})`
+        // let hybrid = new GenNN(origin2.inputs, origin2.layercount, origin2.layersetupArray, 4)
+        // for (let t = 0; t < origin2.structure.length; t++) {
+        //     for (let k = 0; k < origin2.structure[t].length; k++) {
+        //         for (let p = 0; p < origin2.structure[t][k].weights.length; p++) {
+        //             hybrid.structure[t][k].weights[p] = (origin2.structure[t][k].weights[p]+ origin.structure[t][k].weights[p])*.5
+        //         }
+        //     }
+        // }
+        // hybrid.generation =( .5*(origin2.generation +origin.generation))+ 1
+        // hybrid.r = 255
+        // hybrid.g = 255
+        // hybrid.b = 0
+        // hybrid.parent = "tube"
+        // hybrid.name = `rgb(${hybrid.r},${hybrid.g},${hybrid.b})`
 
 
 
         // return clone
         // }
-        // meshes.push(clone)
+        meshes.push(clone)
         // meshes.push(clone2)
-        meshes.push(hybrid)
+        // meshes.push(hybrid)
         // }
         let counter = 1
         let counterstop = (899+999)*10
@@ -830,9 +834,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
         // let mutationratebig = .019
         // let mutationrate = .0009
         // let mutationratesmall = .00009
-        let mutationratebig = .000019
-        let mutationrate = .000009
-        let mutationratesmall = .0000009
+        let mutationratebig = .19
+        let mutationrate = .09
+        let mutationratesmall = .000009
         let difficulty = .5
         let numcounter = 0
 
@@ -883,22 +887,24 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 let clonebest = meshes[0].clone()
                 clonebest.wrong = meshes[0].wrong
                 clonebest.correct = meshes[0].correct
-                clonebest.fitness = 0
+                clonebest.fitness = meshes[0].fitness
                 meshes = meshes.filter(mesh => mesh.marked == 0)
                 meshes.sort((a, b) => (a.fitness < b.fitness) ? 1 : -1)
                 meshes.sort((a) => (Number.isNaN(a.fitness)) ? -1 : 1)
 
-                for (let t = 0; t < meshes.length; t++) {
-                    meshes[t].fitness = 0
-                }
                 // if(Math.random() < 1/(difficulty*10)){
                 //     meshes.splice(395,5)
                 // }
+
+                meshes.push(clonebest)
                 if (meshes.length == 0) {
                     meshes.push(clonebest)
 
-                    console.log("dropped", (10 - meshes.length), "difficulty", difficulty, "best", meshes[0], "number", variablenumber, "output", meshes[0].outputMagnitudes, "rate", 100 * (meshes[0].wrong / (meshes[0].correct + meshes[0].wrong)), `${meshes[0].wrong}/${meshes[0].correct + meshes[0].wrong}`)
+                    console.log("dropped", (40 - meshes.length), "difficulty", difficulty, "best", meshes[0], "number", variablenumber, "output", meshes[0].outputMagnitudes, "rate", 100 * (meshes[0].wrong / (meshes[0].correct + meshes[0].wrong)), `${meshes[0].wrong}/${meshes[0].correct + meshes[0].wrong}`)
 
+                    for (let t = 0; t < meshes.length; t++) {
+                        meshes[t].fitness = 0
+                    }
                     // let SandMesh = new GenNN([...inputArray], 3, [28, 28, 10], 4)
                     // meshes.push(SandMesh)
 
@@ -914,29 +920,39 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     //     meshes.push(SandMesh)
                     // }
                 } else {
-                    console.log("dropped", (10 - meshes.length), "difficulty", difficulty, "best", meshes[0], "number", variablenumber, "output", meshes[0].outputMagnitudes, "rate", 100 * (meshes[0].wrong / (meshes[0].correct + meshes[0].wrong)), `${meshes[0].wrong}/${meshes[0].correct + meshes[0].wrong}`)
-                    for (let t = 0; meshes.length < 10; t++) {
+                    console.log("dropped", (40 - meshes.length), "difficulty", difficulty, "best", meshes[0], "number", variablenumber, "output", meshes[0].outputMagnitudes, "rate", 100 * (meshes[0].wrong / (meshes[0].correct + meshes[0].wrong)), `${meshes[0].wrong}/${meshes[0].correct + meshes[0].wrong}`, imgindex)
+                    
+                for (let t = 0; t < meshes.length; t++) {
+                    meshes[t].fitness = 0
+                }
+                    for (let t = 0; meshes.length < 40; t++) {
                         let SandMesh = meshes[0].clone()
-                        if (meshes.length < 4) {
-                            SandMesh.bigmutate()
-                        } else if (meshes.length < 7) {
-                            SandMesh.mutate()
-                        } else {
+                        for(let k = 0;k<(40-meshes.length);k++){
                             SandMesh.smallmutate()
                         }
+                        // if (meshes.length < 14) {
+                        //     SandMesh.bigmutate()
+                        // } else if (meshes.length < 27) {
+                        //     SandMesh.mutate()
+                        // }   else if (meshes.length < 39) {
+                        //     SandMesh.smallmutate()
+                        // }
                         meshes.push(SandMesh)
                     }
                 }
 
-                for (let t = 0; meshes.length < 10; t++) {
+                for (let t = 0; meshes.length < 40; t++) {
                     let SandMesh = meshes[0].clone()
-                    if (meshes.length < 4) {
-                        SandMesh.bigmutate()
-                    } else if (meshes.length < 7) {
-                        SandMesh.mutate()
-                    } else {
+                    for(let k = 0;k<(40-meshes.length);k++){
                         SandMesh.smallmutate()
                     }
+                    // if (meshes.length < 14) {
+                    //     SandMesh.bigmutate()
+                    // } else if (meshes.length < 27) {
+                    //     SandMesh.mutate()
+                    // }   else if (meshes.length < 39) {
+                    //     SandMesh.smallmutate()
+                    // }
                     meshes.push(SandMesh)
                 }
                 // if (meshes[0].fitness < 100) {
@@ -951,6 +967,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 // }
 
                 counter = 0
+                numcounter = 0
             }
             counter++
             for (let t = 0; t < meshes.length; t++) {
@@ -960,13 +977,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             meshes[t].marked = 0
                             // meshes[t].fitness += .6
                             // meshes[t].fitness += (meshes[t].outputMagnitudes[k]*7)
-                            meshes[t].fitness += meshes[t].outputMagnitudes[k] 
+                            meshes[t].fitness += meshes[t].outputMagnitudes[k] /1000
                             meshes[t].fitness += 1 - (difficulty)
                             // meshes[t].fitness -= 1
                             meshes[t].correct += 1
                         } else {
                             // meshes[t].fitness -= (( (1-meshes[t].outputMagnitudes[k] ))/1.8)*difficulty
-                            meshes[t].fitness += meshes[t].outputMagnitudes[k] 
+                            meshes[t].fitness += meshes[t].outputMagnitudes[k] /1000
                             meshes[t].fitness -= 1 + (difficulty)
                             // meshes[t].fitness -= 100
                             meshes[t].wrong += 1
